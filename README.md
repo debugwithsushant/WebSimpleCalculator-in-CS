@@ -33,3 +33,5 @@ ASP.NET Core MVC 6/7/8+
 C#
 Razor Pages
 HTML5 / CSS3 / JavaScript
+
+![WebSimpleCalculator Screenshot](img/WebSimpleCalculator-in-CS.png)

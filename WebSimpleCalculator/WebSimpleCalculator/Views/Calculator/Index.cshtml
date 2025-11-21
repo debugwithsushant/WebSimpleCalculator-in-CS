@@ -1,0 +1,162 @@
+﻿@model WebSimpleCalculator.Models.Calculator
+
+<h1>Simple Calculator</h1>
+<form method="post" id="calForm">
+    <input type="hidden" id="num1" name="num1" />
+    <input type="hidden" id="num2" name="num2" />
+    <input type="hidden" id="oper" name="oper" />
+
+    <div class="calculator">
+        <input type="text" id="display" readonly />
+        <input type="text" id="result" value="@(string.IsNullOrEmpty(Model.oper) ? "" : $"{Model.num1} {Model.oper} {Model.num2} = {Model.ans}")" readonly />
+
+        <div class="btn-row">
+            <button type="button" onclick="Clear()">C</button>
+            <button type="button" onclick="DeleteNum()">⌫</button>
+            <button type="button" class="op" onclick="setOper('%')">%</button>
+            <button type="button" class="op" onclick="setOper('/')">/</button>
+        </div>
+
+        <div class="btn-row">
+            <button type="button" onclick="setNum('7')">7</button>
+            <button type="button" onclick="setNum('8')">8</button>
+            <button type="button" onclick="setNum('9')">9</button>
+            <button type="button" class="op" onclick="setOper('*')">*</button>
+        </div>
+
+        <div class="btn-row">
+            <button type="button" onclick="setNum('4')">4</button>
+            <button type="button" onclick="setNum('5')">5</button>
+            <button type="button" onclick="setNum('6')">6</button>
+            <button type="button" class="op" onclick="setOper('-')">-</button>
+        </div>
+
+        <div class="btn-row">
+            <button type="button" onclick="setNum('1')">1</button>
+            <button type="button" onclick="setNum('2')">2</button>
+            <button type="button" onclick="setNum('3')">3</button>
+            <button type="button" class="op" onclick="setOper('+')">+</button>
+        </div>
+
+        <div class="btn-row">
+            <button type="button" onclick="setNum('0')">0</button>
+            <button type="button" onclick="setNum('00')">00</button>
+            <button type="button" onclick="setNum('.')">.</button>
+            <button type="submit" class="equal">=</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    let num1 = null;
+    let oper = null;
+
+    function setNum(num){
+        document.getElementById("display").value += num;
+    }
+
+    function setOper(op){
+        num1 = document.getElementById("display").value;
+        oper = op;
+        document.getElementById("display").value = "";
+    }
+
+    function DeleteNum(){
+        let display = document.getElementById("display");
+        display.value = display.value.slice(0, -1);
+    }
+
+    function Clear(){
+        num1 = null;
+        oper = null;
+        document.getElementById("display").value = "";
+        document.getElementById("result").value = "Result";
+    }
+
+    document.getElementById("calForm").addEventListener("submit", function(){
+        document.getElementById("num1").value = num1;
+        document.getElementById("num2").value = document.getElementById("display").value;
+        document.getElementById("oper").value = oper;
+    });
+
+    @if (!string.IsNullOrEmpty(Model.oper))
+    {
+        <text>
+        document.getElementById("display").value = "";
+        </text>
+    }
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+    }
+
+    .calculator {
+        background: #222;
+        padding: 20px;
+        border-radius: 15px;
+        width: 320px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    #display, #result {
+        width: 100%;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 15px;
+        text-align: right;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background: #111;
+        color: #0f0;
+    }
+
+    .btn-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 15px;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+        button:hover {
+            background: #444;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+    .op {
+        background: #ff9500;
+    }
+
+        .op:hover {
+            background: #e08900;
+        }
+
+    .equal {
+        background: #28a745;
+    }
+
+        .equal:hover {
+            background: #218838;
+        }
+</style>

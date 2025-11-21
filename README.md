@@ -33,25 +33,3 @@ ASP.NET Core MVC 6/7/8+
 C#
 Razor Pages
 HTML5 / CSS3 / JavaScript
-
-
-📁 Folder Structure
-WebSimpleCalculator/
-│
-├── Controllers/
-│   └── CalculatorController.cs
-│
-├── Models/
-│   └── Calculator.cs
-│
-├── Views/
-│   └── Calculator/
-│       └── Index.cshtml
-│
-├── wwwroot/
-│   ├── css/
-│   └── js/
-│
-├── Program.cs
-├── Startup.cs (if applicable)
-└── WebSimpleCalculator.csproj
